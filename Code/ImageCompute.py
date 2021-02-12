@@ -4,7 +4,7 @@ import copy
 import numpy
 import time
 import matplotlib.cm as cm
-import matplotlib.pyplot as pyplot
+import imageio
 
 
 # Settings
@@ -175,8 +175,10 @@ if __name__ == '__main__':
         im /= im.max()
         im = numpy.power(im, power)
         im = cm.inferno(im)
+        im *= 255
+        im = im.astype(numpy.uint8)
 
-        pyplot.imsave(outputImage, im)
+        imageio.imsave(outputImage, im, compress_level = 3)
 
         print('[{:d}] Points: {:.1f} G'.format(int(time.time() - t0), final.sum() / 1_000_000_000))
 
